@@ -1,0 +1,34 @@
+###
+# docker build -f ./dockerfile_tomcat7 -t ubuntu14.04_jdk7_tomcat7 . 
+###
+FROM ubuntu:14.04
+RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse\n\
+	deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse\n\
+	deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse\n\
+	deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse\n\
+	deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse\n\
+	\n\
+	deb http://mirrors.aliyuncs.com/ubuntu/ trusty main restricted universe multiverse\n\
+	deb http://mirrors.aliyuncs.com/ubuntu/ trusty-security main restricted universe multiverse\n\
+	deb http://mirrors.aliyuncs.com/ubuntu/ trusty-updates main restricted universe multiverse\n\
+	deb http://mirrors.aliyuncs.com/ubuntu/ trusty-proposed main restricted universe multiverse\n\
+	deb http://mirrors.aliyuncs.com/ubuntu/ trusty-backports main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyuncs.com/ubuntu/ trusty main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyuncs.com/ubuntu/ trusty-security main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyuncs.com/ubuntu/ trusty-updates main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyuncs.com/ubuntu/ trusty-proposed main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyuncs.com/ubuntu/ trusty-backports main restricted universe multiverse\
+" > /etc/apt/sources.list 
+
+RUN apt-get -y update && \
+	apt-get install -y nginx && \
+	cp /etc/nginx/nginx.conf /root/nginx.conf
+#copy then edit
+
+
+CMD nginx -t -c /root/nginx.conf
