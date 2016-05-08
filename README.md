@@ -5,8 +5,9 @@ Study docker
 build an image with ubuntu14.04, jdk7, tomcat7
 and reset mirror list to aliyun
 
-#dockerfile
+#dockerfile_little-web
 build an image with my little web 
-build image: docker run --cap-add SYS_PTRACE -it --name little-web -p 8088:8080 little-web
-you can access it by: http://aliyun-host-ip:8088/little-web/asyncServlet
+build image: docker build -f ./dockerfile_little-web -t little-web .   
+run container: docker run --cap-add SYS_PTRACE -it --name little-web -p 8088:8080 little-web  
+you can access it by: http://aliyun-host-ip:8088/little-web/asyncServlet     
 
