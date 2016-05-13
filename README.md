@@ -4,6 +4,7 @@ Study docker
 #dockerfile_tomcat7
 build an image with ubuntu14.04, jdk7, tomcat7  
 and reset mirror list to aliyun  
+build image:  docker build -f ./dockerfile_tomcat7 -t ubuntu14.04_jdk7_tomcat7 .
 
 #dockerfile_little-web
 build image: docker build -f ./dockerfile_little-web -t little-web .   
