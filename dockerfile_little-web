@@ -1,4 +1,30 @@
-FROM ubuntu14.04_jdk7_tomcat7:latest
-RUN apt-get -y install wget
+FROM ubuntu:14.04
+
+RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse\n\
+	deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse\n\
+	deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse\n\
+	deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse\n\
+	deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse\n\
+	\n\
+	deb http://mirrors.aliyuncs.com/ubuntu/ trusty main restricted universe multiverse\n\
+	deb http://mirrors.aliyuncs.com/ubuntu/ trusty-security main restricted universe multiverse\n\
+	deb http://mirrors.aliyuncs.com/ubuntu/ trusty-updates main restricted universe multiverse\n\
+	deb http://mirrors.aliyuncs.com/ubuntu/ trusty-proposed main restricted universe multiverse\n\
+	deb http://mirrors.aliyuncs.com/ubuntu/ trusty-backports main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyuncs.com/ubuntu/ trusty main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyuncs.com/ubuntu/ trusty-security main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyuncs.com/ubuntu/ trusty-updates main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyuncs.com/ubuntu/ trusty-proposed main restricted universe multiverse\n\
+	deb-src http://mirrors.aliyuncs.com/ubuntu/ trusty-backports main restricted universe multiverse\
+" > /etc/apt/sources.list
+
+RUN apt-get -y update && \
+	apt-get -y install wget && \
+        apt-get install -y tomcat7
 RUN wget http://059260.oss-cn-hangzhou.aliyuncs.com/little-web-1.0.0-SNAPSHOT.war -O /var/lib/tomcat7/webapps/little-web.war 
 CMD service tomcat7 start && tail -200f /var/lib/tomcat7/logs/catalina.out
