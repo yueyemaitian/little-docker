@@ -29,7 +29,7 @@ docker rm -f $(docker ps -a -q)
 brctl addbr br0   
 5、up网卡   
 ip link set br0 up   
-### 6、为br0设置ip地址，地址为当前机器eth0的地址，同时把eth0的地址删掉，然后把eth0连到网桥br0上；删除原来（到eth0的）默认路由规则，并添加默认路由规则到br0，via后边的ip，可以先通过ip route查看应该是什么；由于此命令会导致网络连接中断，如果是远程登录到机器上执行的，需要一步执行   
+6、为br0设置ip地址，地址为当前机器eth0的地址，同时把eth0的地址删掉，然后把eth0连到网桥br0上；删除原来（到eth0的）默认路由规则，并添加默认路由规则到br0，via后边的ip，可以先通过ip route查看应该是什么；由于此命令会导致网络连接中断，如果是远程登录到机器上执行的，需要一步执行   
 		ip addr add 172.16.30.131/24 dev br0; \   
 		ip addr del 172.16.30.131/24 dev eth0; \   
 		brctl addif br0 eth0; \   
