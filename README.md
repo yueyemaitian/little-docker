@@ -91,11 +91,11 @@ route add default gw 172.16.30.2
 25、先安装udhcpc，也可以安装dhclient、dhcpcd等   
 docker exec -it new-docker apt-get update && apt install udhcpc   
 26、docker容器new-docker2通过dhcp获取ip，其中容器网卡是eth1，ens33为宿主机ip   
-pid2=$(docker inspect --format '{{.State.Pid}}' new-docker2)   
+`pid2=$(docker inspect --format '{{.State.Pid}}' new-docker2)   
 ln -s /proc/$pid2/ns/net /var/run/netns/$pid2   
 pipework ens33 new-docker2 dhcp   
 ip netns exec $pid2 ip link set eth1 up   
-ip netns exec $pid2 udhcpc -qi eth1 -x hostname:guest   
+ip netns exec $pid2 udhcpc -qi eth1 -x hostname:guest`   
 #通过Open vSwitch设置ip   
    
 #pipework   
