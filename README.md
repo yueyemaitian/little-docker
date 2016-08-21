@@ -91,20 +91,20 @@ route add default gw 172.16.30.2
 25、先安装udhcpc，也可以安装dhclient、dhcpcd等   
 docker exec -it new-docker apt-get update && apt install udhcpc   
 26、docker容器new-docker2通过dhcp获取ip，其中容器网卡是eth1，ens33为宿主机ip   
-`pid2=$(docker inspect --format '{{.State.Pid}}' new-docker2)   
-ln -s /proc/$pid2/ns/net /var/run/netns/$pid2   
-pipework ens33 new-docker2 dhcp   
-ip netns exec $pid2 ip link set eth1 up   
-ip netns exec $pid2 udhcpc -qi eth1 -x hostname:guest`   
+`pid2=$(docker inspect --format '{{.State.Pid}}' new-docker2)`   
+`ln -s /proc/$pid2/ns/net /var/run/netns/$pid2`   
+`pipework ens33 new-docker2 dhcp`   
+`ip netns exec $pid2 ip link set eth1 up`   
+`ip netns exec $pid2 udhcpc -qi eth1 -x hostname:guest`   
 #通过Open vSwitch设置ip   
    
 #pipework   
 #通过虚拟网桥，将Docker容器配置到宿主机网络环境中   
 22、通过pipework给容器my-containe设置一个网卡eth1，网卡ip为172.16.30.139/24，修改容器配置的默认路由172.16.30.2，并把网卡peer的宿主机上的网卡加入到网桥br0（如果br0不存在则创建）   
-pipework br0 my-container 172.16.30.139/24@172.16.30.2   
+`pipework br0 my-container 172.16.30.139/24@172.16.30.2`   
 #通过macvlan方式，将Docker容器配置到宿主机网络环境中   
 23、在物理机网卡eth0上创建macvlan，并添加到容器中；此时宿主机不能跟容器通信，宿主机之外可以   
-pipework eth0 my-container 172.16.30.139/24@172.16.30.2   
+`pipework eth0 my-container 172.16.30.139/24@172.16.30.2`   
    
    
    
