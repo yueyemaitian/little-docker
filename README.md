@@ -16,13 +16,14 @@ you can access it by: http://aliyun-host-ip:8088/little-web/asyncServlet
 https://cr.console.aliyun.com/?spm=5176.1971733.2.28.f6VlND#/docker/booster   
    
 #有用的命令   
+[Markup语法](http://www.coderli.com/write-readme-for-your-project/)  
 #镜像和容器部分   
 1、列出无标签的镜像id    
-`docker images -q --filter "dangling=true"    `
+`docker images -q --filter "dangling=true"`    
 2、删除无标签的镜像    
-`docker rmi $(docker images -q --filter "dangling=true")    `
+`docker rmi $(docker images -q --filter "dangling=true")`    
 3、强制停止并删除所有容器   
-`docker rm -f $(docker ps -a -q)   `
+`docker rm -f $(docker ps -a -q)`   
 #网络部分   
 #通过虚拟网桥，将Docker容器配置到宿主机网络环境中   
 4、添加网卡   
